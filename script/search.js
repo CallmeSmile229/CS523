@@ -1,14 +1,16 @@
 const search_box = document.querySelector(".search-box"),
 searchInput = search_box.querySelector("input");
 var response;
+const info = document.getElementById("info");
 
 function data(result,word){
     if(result.title){
         response = `Can't find the meaning of <span>"${word}"</span>. Please, try to search for another word.`;
     }
     else{
-        console.log(result);
-        search_box.classList.add("active")
+        // console.log(result);
+        // console.log(info);
+        info.style.display = 'block';
     }
 }
 
