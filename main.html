@@ -22,28 +22,41 @@
       <div class="logo-box">
         <img src="assets/images/LOGO.png" class="logo" alt="">
       </div>
-      <div class="search-box">
-        <input class="search-input" type="text" placeholder="Search something...">
-        <button class="search-btn">
-          <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0,0,256,256">
-          <g fill="#000000" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
-            <g transform="scale(5.12,5.12)">
-              <path d="M21,3c-9.39844,0 -17,7.60156 -17,17c0,9.39844 7.60156,17 17,17c3.35547,0 6.46094,-0.98437 9.09375,-2.65625l12.28125,12.28125l4.25,-4.25l-12.125,-12.09375c2.17969,-2.85937 3.5,-6.40234 3.5,-10.28125c0,-9.39844 -7.60156,-17 -17,-17zM21,7c7.19922,0 13,5.80078 13,13c0,7.19922 -5.80078,13 -13,13c-7.19922,0 -13,-5.80078 -13,-13c0,-7.19922 5.80078,-13 13,-13z">
-              </path>
+      <div id="search-and-recomandation">
+        <form method="get" class="search-box">
+          <input class="search-input" type="text" name="k-word" placeholder="Search something...">
+          <button class="search-btn" type="submit">
+            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0,0,256,256">
+            <g fill="#000000" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+              <g transform="scale(5.12,5.12)">
+                <path d="M21,3c-9.39844,0 -17,7.60156 -17,17c0,9.39844 7.60156,17 17,17c3.35547,0 6.46094,-0.98437 9.09375,-2.65625l12.28125,12.28125l4.25,-4.25l-12.125,-12.09375c2.17969,-2.85937 3.5,-6.40234 3.5,-10.28125c0,-9.39844 -7.60156,-17 -17,-17zM21,7c7.19922,0 13,5.80078 13,13c0,7.19922 -5.80078,13 -13,13c-7.19922,0 -13,-5.80078 -13,-13c0,-7.19922 5.80078,-13 13,-13z">
+                </path>
+              </g>
             </g>
-          </g>
-          </svg>
-        </button>
+            </svg>
+          </button>
+        </form>
+        <div id="recomandation">
+          <p class="rcm">hello</p>
+          <p class="rcm">hello1</p>
+          <p class="rcm">hello2</p>
+          <p class="rcm">hello3</p>
+          <p class="rcm">hello4</p>
+        </div>
       </div>  
     </div>
     <div id="info">
-      <ul class="infor-word">
-        <li class="word">
-          <div class="keyword">Smile</div>
-          <div class="part-of-speech">verb</div>
+      <ul class="infor-word no-bullets">
+        <li class="word-details">
+          <div class="word">
+            <p>__</p>
+          </div>
+          <div class="part-of-speech">
+            <span>__</span> 
+          </div>
         </li>
         <li class="pronunciation">
-          <div class="volumn-up"> 
+          <div id="volumn-up" onclick="playaudio()" type="button"> 
             <svg fill="#000000" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
             width="20px" height="20px" viewBox="0 0 522.234 522.234"
             xml:space="preserve">
@@ -108,20 +121,18 @@
               </g>
             </svg>
           </div>
-          <div class="pronun"> | Xờ mai |</div>
+          <div class="pronun"> 
+            <span>__</span>
+          </div>
         </li>
         <li class="meaning">
           <div class="define">
-            To make a smile appear on your face
+            <span>__</span>
           </div>
           <div class="example"> 
             <div class="exam">
               <h6>Example</h6>
-              <ul>
-                <li>‘That's easy,’ Elizabeth said, smiling.</li>
-                <li>He smiled to think how naive he used to be.</li>
-                <li>He never seems to smile.</li>
-              </ul>
+              <span>__</span>
             </div>
           </div>
         </li>
