@@ -1,6 +1,5 @@
 const search_box = document.querySelector(".search-box"),
 searchInput = search_box.querySelector("input");
-var response;
 const info = document.getElementById("info");
 var search_recomandation = document.getElementById("search-and-recomandation");
 var rcm = document.getElementById("recomandation");
@@ -19,7 +18,7 @@ class Trie {
     constructor() {
         this.root = new TrieNode();
     }
-    
+
     insert(word) {
         let node = this.root;
         for (let i = 0; i < word.length; i++) {
@@ -30,7 +29,7 @@ class Trie {
         }
         node.isWord = true;
     }
-    
+
     suggestHelper(root, list, curr) {
         if (root.isWord) {
         list.push(curr);
@@ -42,7 +41,7 @@ class Trie {
         this.suggestHelper(root.children[child], list, curr + child);
         }
     }
-    
+
     suggest(prefix) {
         let node = this.root;
         let curr = "";
@@ -60,11 +59,12 @@ class Trie {
 }
 
 function showData(result,word){
-    if(result.title){
-        response = `Can't find the meaning of <span>"${word}"</span>. Please, try to search for another word.`;
+    if(result.title == "No Definitions Found"){
+        var response = document.getElementById("response");
+        document.querySelector("#response p").innerText = "No exact match found for \'" + word + "\' in English";
+        response.style.display = "block";
     }
     else{
-        // console.log(result);
         document.querySelector(".word p").innerText = result[0].word;
         document.querySelector(".part-of-speech span").innerText = result[0].meanings[0].partOfSpeech;
         for (let i = 0; i < result[0].phonetics.length; i++) {    
@@ -89,16 +89,25 @@ function showData(result,word){
 }
 
 function recomandation(data,word){
-    if (word){    
+    if(word.length>1){
+        listRcm = trieWord.suggest(word);
+        console.log(listRcm);
+        rcm.innerHTML = "";
+        for(let i = 0;i<10;i++){
+            if (listRcm[i]){
+                let rcmtag = `<div class="rcm"><a href="/main.html?k-word=${listRcm[i]}">${listRcm[i]}</a></div>`;
+                rcm.insertAdjacentHTML("beforeend",rcmtag);
+            }
+        }
         search_recomandation.className = "active";
         rcm.style.display = "block";
-
+        
     }
-    else{
-        search_recomandation.className = "";
+    else
+    {
         rcm.style.display = "none";
+        search_recomandation.setAttribute("style","height:auto");
     }
-
 }
 
 function fetchAPI(word){
@@ -106,22 +115,25 @@ function fetchAPI(word){
     fetch(url).then(res => res.json()).then(result => showData(result,word));
 };
 
+trieWord = new Trie();        
 
-            
-fetch('/data/wordlist.json').then(response => {
+fetch('/data/oxford.json').then(response => {
     return response.json();
 }).then(data => {
-        // let trie = new Trie();
-        // data.forEach((word) => trie.insert(word['word']));
-        if(key_word){
-            searchInput.value = key_word;
-            fetchAPI(key_word);
-        }
-        searchInput.addEventListener("keyup",e =>{
-            recomandation(data,e.target.value);
-        });
-        }).catch(err => {
-            console.warn('cant read Json file')
+
+    console.log('oce');
+    
+    for(let i = 0;i < data.length;i++){
+        trieWord.insert(data[i]['word']);
+    }
+    if(key_word){
+        fetchAPI(key_word);
+    }
+    searchInput.addEventListener("keyup",e =>{
+        recomandation(data,e.target.value);
+    });
+    }).catch(err => {
+        console.warn('Something wrong!!!')
 });
 
 function playaudio(){
